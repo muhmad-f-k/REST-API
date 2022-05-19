@@ -1,6 +1,6 @@
 import os
 import datetime
-from sqlalchemy import Column, Integer, create_engine, DATE
+from sqlalchemy import Column, Integer, create_engine, DATE, String
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 BASE_DIR = os.path.dirname(os.path.realpath(__file__))
@@ -24,9 +24,10 @@ class Magasin(base):
     endring_fyllingsgrad = Column(Integer, nullable=False)
     latitude = Column(Integer, nullable=False)
     longitude = Column(Integer, nullable=False)
+    name = Column(String(50), nullable=False)
 
     def __repr__(self):
-        return f"{self.id} - {self.dato_id} - {self.iso_uke} - {self.fyllingsgrad} - {self.kapasitet_twh} - {self.fylling_twh} - {self.fyllingsgrad_forrige_uke} - {self.endring_fyllingsgrad} - {self.latitude} - {self.longitude}"
+        return f"{self.id} - {self.dato_id} - {self.iso_uke} - {self.fyllingsgrad} - {self.kapasitet_twh} - {self.fylling_twh} - {self.fyllingsgrad_forrige_uke} - {self.endring_fyllingsgrad} - {self.latitude} - {self.longitude} - {self.name}"
 
 
 base.metadata.create_all(engine)
