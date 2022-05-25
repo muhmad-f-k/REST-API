@@ -37,6 +37,9 @@ def add_magasin():
 def update_magasin(id):
     magasin_id = session.query(Magasin).filter(Magasin.id == id).first()
 
+    if magasin_id is None:
+        return {"erro": "Magasin finnes ikke"}
+
     iso_uke = request.json["iso_uke"]
     fyllingsgrad = request.json["fyllingsgrad"]
     kapasitet_twh = request.json["kapasitet_twh"]
@@ -63,7 +66,7 @@ def update_magasin(id):
 def delete_magasin(id):
     magasin = session.query(Magasin).filter(Magasin.id == id).first()
     if magasin is None:
-        return {"erro": "Magasin Not Found"}
+        return {"erro": "Magasin finnes ikke"}
     session.delete(magasin)
     session.commit()
     return {"Name": magasin.name, "massage": "Er slettet"}
